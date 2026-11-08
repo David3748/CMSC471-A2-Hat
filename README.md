@@ -5,6 +5,8 @@ Two visualizations of one dataset, one honest (white hat) and one subtly mislead
 
 ## The site
 
+Live at **https://david3748.github.io/CMSC471-A2-Hat/** (GitHub Pages, deployed from `main`).
+
 Both visualizations use the World Bank's maternal mortality estimates for 2000–2017.
 
 - **White hat:** maternal mortality by region in 2000 vs 2017, where the world's 295,000 maternal deaths happened,
