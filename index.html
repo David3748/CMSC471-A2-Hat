@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maternal Mortality, Two Ways</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="page-header">
+    <p class="eyebrow">CMSC471 · Assignment 2: White Hat / Black Hat</p>
+    <h1>Maternal mortality, two ways</h1>
+    <p class="lede">One World Bank dataset, shown honestly and then shown to mislead.</p>
+  </header>
+
+  <main>
+    <section id="white-hat">
+      <h2>White hat</h2>
+
+      <article class="chart-card">
+        <h3>Maternal mortality fell in every region from 2000 to 2017</h3>
+        <p class="subtitle">Maternal deaths per 100,000 live births. The US rate rose from 12 to 19, still far below the world rate of 211.</p>
+        <div id="wh-rates" class="chart"></div>
+        <p class="caption">Source: World Bank, World Development Indicators; modeled estimates by WHO, UNICEF, UNFPA, the World Bank Group and the UN Population Division. Many countries, especially in sub-Saharan Africa and South Asia, don't register every death, so their rates come from statistical models and carry wide uncertainty ranges. Regions are World Bank groupings. High-income countries are a separate grouping that overlaps them.</p>
+        <details><summary>Data table</summary><div id="wh-rates-table" class="table-view"></div></details>
+      </article>
+
+      <article class="chart-card">
+        <h3>Two-thirds of maternal deaths happen in sub-Saharan Africa</h3>
+        <p class="subtitle">Number of maternal deaths in 2017 by region, and each region's share of the world's 295,000.</p>
+        <div id="wh-deaths" class="chart"></div>
+        <p class="caption">Source: World Bank, World Development Indicators (number of maternal deaths). Regional estimates are rounded and don't sum exactly to the world total.</p>
+        <details><summary>Data table</summary><div id="wh-deaths-table" class="table-view"></div></details>
+      </article>
+
+      <article class="chart-card">
+        <h3>Among wealthy countries, the US is the outlier</h3>
+        <p class="subtitle">Maternal deaths per 100,000 live births, 2000–2017.</p>
+        <div class="legend">
+          <span class="legend-item"><span class="key-line highlight"></span>United States</span>
+          <span class="legend-item"><span class="key-line context"></span>Canada, United Kingdom, France, Germany, Japan, Australia</span>
+        </div>
+        <div id="wh-peers" class="chart"></div>
+        <p class="caption">Part of the US increase reflects a change in record-keeping: between 2003 and 2017, US states added a pregnancy checkbox to death certificates, which the CDC's National Center for Health Statistics found inflated counts of maternal deaths (<a href="https://www.cdc.gov/nchs/data/nvsr/nvsr69/nvsr69_01-508.pdf">NCHS, 2020</a>).</p>
+        <details><summary>Data table</summary><div id="wh-peers-table" class="table-view"></div></details>
+      </article>
+
+      <div class="writeup todo">
+        <h3>White hat write-up</h3>
+        <p>To be written.</p>
+      </div>
+    </section>
+
+    <section id="black-hat">
+      <h2>Black hat</h2>
+
+      <article class="chart-card news">
+        <p class="kicker">Maternal health</p>
+        <h3 class="headline">The US is killing our mothers</h3>
+        <p class="subtitle">Since 2000, maternal mortality has risen faster in the United States than in any other country on Earth.</p>
+        <div id="bh-stats" class="chart stats"></div>
+
+        <h4>Change in maternal mortality, 2000–2017</h4>
+        <div id="bh-map" class="chart"></div>
+        <div id="bh-map-legend" class="chart map-legend"></div>
+
+        <h4>While the rest of the world made progress, the US went backwards</h4>
+        <div class="legend">
+          <span class="legend-item"><span class="key-line us"></span>United States</span>
+          <span class="legend-item"><span class="key-line bh-context"></span>Other regions</span>
+        </div>
+        <div id="bh-index" class="chart"></div>
+
+        <p class="caption">Source: World Bank, World Development Indicators. Estimates by WHO, UNICEF, UNFPA, the World Bank Group and the UN Population Division.</p>
+        <details><summary>Data table</summary><div id="bh-table" class="table-view"></div></details>
+      </article>
+
+      <div class="writeup todo">
+        <h3>Black hat write-up</h3>
+        <p>To be written.</p>
+      </div>
+    </section>
+
+    <section id="references">
+      <h2>Data sources and references</h2>
+      <ul>
+        <li>World Bank, <a href="https://datatopics.worldbank.org/world-development-indicators/">World Development Indicators</a> (snapshot of 2021-09-15): maternal mortality ratio, modeled estimate (SH.STA.MMRT) and number of maternal deaths (SH.MMR.DTHS). Licensed <a href="https://datacatalog.worldbank.org/public-licenses#cc-by">CC BY 4.0</a>.</li>
+        <li>Pre-cleaned mirror: <a href="https://github.com/light-and-salt/World-Bank-Data-by-Indicators">World Bank Data by Indicators</a>.</li>
+        <li>WHO, UNICEF, UNFPA, World Bank Group and UN Population Division, <a href="https://www.who.int/publications/i/item/9789241516488"><cite>Trends in Maternal Mortality: 2000 to 2017</cite></a> (2019), the source of the modeled estimates.</li>
+        <li>National Center for Health Statistics, <a href="https://www.cdc.gov/nchs/data/nvsr/nvsr69/nvsr69_01-508.pdf"><cite>Evaluation of the Pregnancy Status Checkbox on the Identification of Maternal Deaths</cite></a>, National Vital Statistics Reports 69(1), January 2020.</li>
+        <li>Map shapes: <a href="https://github.com/topojson/world-atlas">world-atlas</a> (Natural Earth, 1:110m). Country codes: <a href="https://github.com/michaelwittig/node-i18n-iso-countries">i18n-iso-countries</a>. Charts built with <a href="https://d3js.org/">D3.js</a>.</li>
+      </ul>
+    </section>
+
+    <section id="process" class="todo">
+      <h2>Development process</h2>
+      <p>To be written: how the work was split, people-hours, and what took the most time.</p>
+    </section>
+
+    <section id="ai-usage" class="todo">
+      <h2>AI usage</h2>
+      <p>To be written.</p>
+    </section>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+  <script src="js/helpers.js"></script>
+  <script src="js/whitehat.js"></script>
+  <script src="js/blackhat.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

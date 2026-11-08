@@ -18,5 +18,8 @@ for f in "${FILES[@]}"; do
   curl -fsSL -o "$RAW_DIR/$(basename "$f")" "$BASE/$f"
 done
 
+# ISO alpha-3 -> numeric codes, to join World Bank rows to the world-atlas map shapes
+curl -fsSL -o "$RAW_DIR/iso-codes.json" "https://cdn.jsdelivr.net/npm/i18n-iso-countries@7.14.0/codes.json"
+
 echo "Downloaded to $RAW_DIR:"
 ls -1 "$RAW_DIR"
