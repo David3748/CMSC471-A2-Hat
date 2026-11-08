@@ -1,0 +1,5 @@
+# Raw ProPublica data: fetch with scripts/get_data.sh (terms of use forbid republishing it)
+data/raw/
+
+.DS_Store
+.vscode/
