@@ -5,9 +5,11 @@ Two visualizations of one dataset, one honest (white hat) and one subtly mislead
 
 ## Dataset
 
-[Civilian Complaints Against New York City Police Officers](https://www.propublica.org/datastore/dataset/civilian-complaints-against-new-york-city-police-officers),
-from ProPublica, obtained from New York City's Civilian Complaint Review Board (CCRB) after New York repealed
-section 50-a in June 2020.
+The World Bank's [Gender Statistics](https://data.worldbank.org/topic/gender) from the World Development Indicators,
+via the pre-cleaned [World Bank Data by Indicators](https://github.com/light-and-salt/World-Bank-Data-by-Indicators/tree/master/gender)
+mirror linked in the assignment. The World Bank last updated this snapshot on 2021-09-15. World Bank data is licensed
+under [CC BY 4.0](https://datacatalog.worldbank.org/public-licenses#cc-by): we can publish derived data as long as we
+credit the World Bank.
 
 ### Get the data
 
@@ -15,59 +17,40 @@ section 50-a in June 2020.
 ./scripts/get_data.sh
 ```
 
-This downloads the archive into `data/raw/`, which contains:
+This downloads into `data/raw/` (gitignored; commit derived files instead):
 
 | File | What it is |
 | --- | --- |
-| `allegations_202007271729.csv` | The data: one row per allegation |
-| `CCRB Data Layout Table.xlsx` | Field definitions plus rank, command, FADO and disposition glossaries |
-| `ReadMe _ Civilian Complaints Against New York City Police Officers.pdf` | ProPublica's notes on the dataset |
+| `gender-raw-2021.csv` | The data: one row per country × indicator, one column per year 1960–2020 |
+| `Metadata_Country_API_17_DS2_en_csv_v2_3058240.csv` | Region and income group for each country |
+| `Metadata_Indicator_API_17_DS2_en_csv_v2_3058240.csv` | Definition and source of each indicator |
+| `health-raw-2021.csv` | Health indicators, used only for female population by age (`SP.POP.TOTL.FE.IN`, `SP.POP.*.FE.5Y`) |
 
-`data/raw/` is gitignored. ProPublica's [terms of use](https://www.propublica.org/datastore/terms/) say we can't
-republish the raw data on a stand-alone basis, and we must cite ProPublica wherever the data is used. Anything the
-site loads should be a derived or aggregated file outside `data/raw/`.
+We use the raw file rather than the mirror's cleaned `gender.csv`, which keeps only 50 of the 156 indicators and
+drops parliament seats, labor force participation and the Women, Business and the Law index.
 
-### Shape
+### Reading the raw files
 
-- 33,358 rows, one per **allegation**. A complaint can hold several allegations against several officers.
-- 12,056 unique complaints (`complaint_id`) against 3,996 unique officers (`unique_mos_id`).
-- Complaints received September 1985 through January 2020.
+- The first 4 lines are a title block: `pd.read_csv(path, skiprows=4)`.
+- Data is wide, one column per year. Melt it to long (country, indicator, year, value) and drop empty values.
+- The 266 rows per indicator are 217 countries plus 49 aggregates such as World, Arab World and High income.
+  Countries are the codes with a `Region` in the country metadata; filter on that or aggregates get counted twice.
+- Aggregates like World are weighted averages (usually by population), so they won't match a simple average of
+  countries. For example, 2019 female labor force participation is 47.3% for World but 52.1% averaged over countries.
 
-### Selection bias to keep in mind
+### Coverage is uneven
 
-- The data only covers officers who were **still on the force in late June 2020** and had **at least one
-  substantiated allegation**. Officers with only unsubstantiated or exonerated allegations are absent.
-- ProPublica removed allegations the CCRB found **unfounded** (did not occur).
-- Only **closed** cases that the CCRB **fully investigated** are included.
-- Complainant demographics are often blank or "Unknown" (about 4,500 rows have no complainant ethnicity).
+156 indicators, but most are sparse. Which countries report, and when, varies a lot:
 
-### Fields
+| Indicator | Countries | High-income share of reporters |
+| --- | --- | --- |
+| Life expectancy, fertility | 208 | (nearly every country, 1960–2019) |
+| Labor force participation (ILO modeled) | 187 | (every year 1990–2019) |
+| Seats held by women in parliament | 193 | 30% |
+| Married by 18 | 132 | 8% |
+| Believe wife-beating is justified | 107 | 5% |
+| Unpaid domestic and care work | 89 | 39% (no India, Indonesia, Nigeria or Bangladesh) |
 
-| Field | Description |
-| --- | --- |
-| `unique_mos_id` | Unique officer ID ("member of service") |
-| `first_name`, `last_name` | Officer's name |
-| `command_now` | Officer's command assignment as of July 2020 |
-| `shield_no` | Officer's shield number |
-| `complaint_id` | Unique complaint ID |
-| `month_received`, `year_received` | When the CCRB received the complaint |
-| `month_closed`, `year_closed` | When the CCRB closed the investigation |
-| `command_at_incident` | Officer's command at the time of the incident |
-| `rank_abbrev_incident`, `rank_incident` | Officer's rank at the time of the incident |
-| `rank_abbrev_now`, `rank_now` | Officer's rank as of July 2020 |
-| `mos_ethnicity`, `mos_gender`, `mos_age_incident` | Officer demographics (age at incident) |
-| `complainant_ethnicity`, `complainant_gender`, `complainant_age_incident` | Complainant demographics (age at incident) |
-| `fado_type` | Top-level category: Force, Abuse of Authority, Discourtesy, Offensive Language |
-| `allegation` | Specific allegation within the FADO category |
-| `precinct` | Precinct associated with the complaint |
-| `contact_reason` | Why the officer made contact with the complainant |
-| `outcome_description` | Outcome of the contact (arrest, summons, none, ...) |
-| `board_disposition` | CCRB finding; see below |
-
-`board_disposition` starts with one of three findings, and Substantiated also names the discipline the CCRB
-recommended, such as `Substantiated (Charges)`:
-
-- **Substantiated** (8,301 allegations): the conduct occurred and violated NYPD rules. The NYPD decides whether
-  to follow the recommended discipline.
-- **Exonerated** (9,609): the conduct occurred but NYPD rules allowed it.
-- **Unsubstantiated** (15,448): the CCRB could not establish both that it occurred and that it broke the rules.
+For reference, 37% of all 217 countries are high income. Survey-based indicators come from different years per
+country (unpaid care work: 2001–2019), so a "latest value" map is not a single snapshot. There is no gender pay gap
+indicator in this set.
