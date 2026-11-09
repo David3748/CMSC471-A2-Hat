@@ -41,8 +41,29 @@
           <span class="legend-item"><span class="key-line context"></span>Canada, United Kingdom, France, Germany, Japan, Australia</span>
         </div>
         <div id="wh-peers" class="chart"></div>
-        <p class="caption">Part of the US increase reflects a change in record-keeping: between 2003 and 2017, US states added a pregnancy checkbox to death certificates, which the CDC's National Center for Health Statistics found inflated counts of maternal deaths (<a href="https://www.cdc.gov/nchs/data/nvsr/nvsr69/nvsr69_01-508.pdf">NCHS, 2020</a>).</p>
+        <p class="caption">Source: World Bank, World Development Indicators. Part of the US rise likely comes from a change in how US death certificates record pregnancy, shown in the next chart.</p>
         <details><summary>Data table</summary><div id="wh-peers-table" class="table-view"></div></details>
+      </article>
+
+      <article class="chart-card">
+        <h3>During these years, the US changed how it counts maternal deaths</h3>
+        <p class="subtitle">In 2003 the standard US death certificate added a checkbox asking whether a woman who died was pregnant, or had been in the past year. States added it to their own certificates one at a time over the next 14 years.</p>
+
+        <h4>States whose death certificates had the pregnancy checkbox</h4>
+        <div id="wh-checkbox" class="chart"></div>
+
+        <h4>Counting the same deaths with the checkbox more than doubled the rate</h4>
+        <p class="subtitle">The CDC's National Center for Health Statistics (NCHS) coded the 2016 death records that mentioned a pregnancy twice: once using the checkbox, and once ignoring it, as coders did before 2003.</p>
+        <div id="wh-recount" class="chart"></div>
+
+        <ul class="notes">
+          <li>The checkbox catches maternal deaths that doctors didn't connect to pregnancy when writing the cause of death, but it also adds errors. For women aged 40–54, it multiplied maternal deaths fourteenfold (523 instead of 37 over 2015–2016). Without the checkbox, about half of those deaths would have been coded to cancer or heart disease.</li>
+          <li>Because states weren't counting the same way, NCHS stopped publishing an official national maternal mortality rate after 2007.</li>
+          <li>The World Bank numbers in the charts above are modeled estimates rather than NCHS counts, but for the US they draw on these same death records. So part of the US rise from 12 to 19 likely reflects how deaths were counted rather than added risk. NCHS says its study can't tell how much of the extra count is better detection and how much is error.</li>
+        </ul>
+
+        <p class="caption">Source: Hoyert, Uddin and Miniño, <a href="https://www.cdc.gov/nchs/data/nvsr/nvsr69/nvsr69_01-508.pdf">Evaluation of the Pregnancy Status Checkbox on the Identification of Maternal Deaths</a>, NCHS, 2020: Table I for when each state added the checkbox, Table B for the rates. States count once their own question had the same detail as the standard checkbox; mid-year additions count in that year. California kept a simpler yes/no question. The 2016 rates cover all 50 states and DC; the with-checkbox rate counts California and West Virginia, which lacked the checkbox, the old way. NCHS rates differ from the World Bank's modeled estimates.</p>
+        <details><summary>Data tables</summary><div id="wh-checkbox-table" class="table-view"></div></details>
       </article>
 
       <div class="writeup todo">
@@ -87,7 +108,7 @@
         <li>World Bank, <a href="https://datatopics.worldbank.org/world-development-indicators/">World Development Indicators</a> (snapshot of 2021-09-15): maternal mortality ratio, modeled estimate (SH.STA.MMRT) and number of maternal deaths (SH.MMR.DTHS). Licensed <a href="https://datacatalog.worldbank.org/public-licenses#cc-by">CC BY 4.0</a>.</li>
         <li>Pre-cleaned mirror: <a href="https://github.com/light-and-salt/World-Bank-Data-by-Indicators">World Bank Data by Indicators</a>.</li>
         <li>WHO, UNICEF, UNFPA, World Bank Group and UN Population Division, <a href="https://www.who.int/publications/i/item/9789241516488"><cite>Trends in Maternal Mortality: 2000 to 2017</cite></a> (2019), the source of the modeled estimates.</li>
-        <li>National Center for Health Statistics, <a href="https://www.cdc.gov/nchs/data/nvsr/nvsr69/nvsr69_01-508.pdf"><cite>Evaluation of the Pregnancy Status Checkbox on the Identification of Maternal Deaths</cite></a>, National Vital Statistics Reports 69(1), January 2020.</li>
+        <li>Donna L. Hoyert, Sayeedha F.G. Uddin and Arialdi M. Miniño, <a href="https://www.cdc.gov/nchs/data/nvsr/nvsr69/nvsr69_01-508.pdf"><cite>Evaluation of the Pregnancy Status Checkbox on the Identification of Maternal Deaths</cite></a>, National Vital Statistics Reports 69(1), National Center for Health Statistics, January 2020. State checkbox adoption dates (Table I) and US rates with and without the checkbox (Table B) were transcribed by hand.</li>
         <li>Map shapes: <a href="https://github.com/topojson/world-atlas">world-atlas</a> (Natural Earth, 1:110m). Country codes: <a href="https://github.com/michaelwittig/node-i18n-iso-countries">i18n-iso-countries</a>. Charts built with <a href="https://d3js.org/">D3.js</a>.</li>
       </ul>
     </section>

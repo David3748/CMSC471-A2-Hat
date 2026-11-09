@@ -45,6 +45,12 @@ function barPath(x0, x1, y, height, radius = 4) {
   return `M${x0},${y}H${x1 - r}Q${x1},${y} ${x1},${y + r}V${y + height - r}Q${x1},${y + height} ${x1 - r},${y + height}H${x0}Z`;
 }
 
+// Vertical column with a 4px rounded data end on top and a square baseline end
+function columnPath(x0, x1, yTop, yBase, radius = 4) {
+  const r = Math.min(radius, (x1 - x0) / 2, yBase - yTop);
+  return `M${x0},${yBase}V${yTop + r}Q${x0},${yTop} ${x0 + r},${yTop}H${x1 - r}Q${x1},${yTop} ${x1},${yTop + r}V${yBase}Z`;
+}
+
 function addTable(selector, columns, rows) {
   const table = d3.select(selector).append('table');
   table.append('thead').append('tr')

@@ -1,11 +1,14 @@
-// White hat: rates and counts on zero-based scales, and the US next to its wealthy peers.
+// White hat: rates and counts on zero-based scales, the US next to its wealthy peers,
+// and how the US pregnancy checkbox changed what counts as a maternal death.
 
 const PEERS = ['CAN', 'GBR', 'FRA', 'DEU', 'JPN', 'AUS'];
 
-function drawWhiteHat(data) {
+function drawWhiteHat(data, checkbox) {
   drawRegionRates(data);
   drawDeathsByRegion(data);
   drawPeerTrends(data);
+  drawCheckboxRollout(checkbox);
+  drawRecount(checkbox);
 }
 
 // Dumbbell chart: each region's rate in 2000 (hollow) and 2017 (filled)
@@ -191,4 +194,107 @@ function drawPeerTrends(data) {
 
   addTable('#wh-peers-table', ['Country', ...years.filter((y, i) => i % 5 === 0 || i === years.length - 1)],
     series.map(s => [s.name, ...s.values.filter((v, i) => i % 5 === 0 || i === years.length - 1)]));
+}
+
+// Column chart: how many of the 50 states and DC had the pregnancy checkbox by the end of each year
+function drawCheckboxRollout(checkbox) {
+  const total = checkbox.adoption.length;
+  const rows = d3.range(2000, 2018).map(year => ({
+    year,
+    count: checkbox.adoption.filter(d => d.year != null && d.year <= year).length,
+    added: checkbox.adoption.filter(d => d.year === year).map(d => d.state),
+  }));
+  const last = rows[rows.length - 1];
+
+  const margin = { top: 16, right: 130, bottom: 40, left: 52 };
+  const width = 760;
+  const height = 240;
+  const x = d3.scaleBand(rows.map(d => d.year), [margin.left, width - margin.right]).padding(0.25);
+  const y = d3.scaleLinear([0, total], [height - margin.bottom, margin.top]);
+
+  const svg = createSvg('#wh-checkbox', width, height, 'Column chart of the number of states using the pregnancy checkbox on death certificates, 2000 to 2017');
+
+  svg.append('g').attr('class', 'grid')
+    .selectAll('line').data(y.ticks(5)).join('line')
+    .attr('x1', margin.left).attr('x2', width - margin.right)
+    .attr('y1', y).attr('y2', y);
+  svg.append('g').attr('class', 'axis')
+    .attr('transform', `translate(0,${height - margin.bottom})`)
+    .call(d3.axisBottom(x).tickValues([2000, 2005, 2010, 2015, 2017]).tickSizeOuter(0));
+  svg.append('g').attr('class', 'axis axis-y')
+    .attr('transform', `translate(${margin.left},0)`)
+    .call(d3.axisLeft(y).ticks(5).tickSize(0).tickPadding(8));
+
+  const column = svg.append('g').selectAll('g').data(rows).join('g')
+    .attr('class', 'row');
+  column.append('path').attr('class', 'bar')
+    .attr('d', d => columnPath(x(d.year), x(d.year) + x.bandwidth(), y(d.count), y(0)));
+  column.append('rect').attr('class', 'hit')
+    .attr('x', d => x(d.year) - (x.step() - x.bandwidth()) / 2).attr('y', margin.top)
+    .attr('width', x.step()).attr('height', height - margin.bottom - margin.top)
+    .on('pointerenter pointermove', (event, d) => showTooltip(event, String(d.year), [
+      { value: String(d.count), label: `of ${total} states and DC had the checkbox`, color: token('--series-1') },
+      ...(d.added.length ? [{ value: `+${d.added.length}`, label: d.added.join(', ') }] : []),
+    ]))
+    .on('pointerleave', hideTooltip);
+
+  svg.append('text').attr('class', 'end-label bold')
+    .attr('x', x(last.year) + x.bandwidth() + 10).attr('y', y(last.count)).attr('dy', '0.32em')
+    .text(`${last.count} of ${total}`);
+  svg.append('text').attr('class', 'note-label')
+    .attr('x', x(last.year) + x.bandwidth() + 10).attr('y', y(last.count) + 18)
+    .text('all but California');
+
+  addTable('#wh-checkbox-table', ['Year', `States and DC with the checkbox (of ${total})`, 'Added that year'],
+    rows.map(d => [d.year, d.count, d.added.join(', ') || '–']));
+}
+
+// Bar chart: NCHS's US rate before the checkbox, and the same 2016 deaths counted without and with it.
+// Same 0–25 scale as the peer chart.
+function drawRecount(checkbox) {
+  const rows = checkbox.recount;
+  const fmtRate = d3.format('.1f');
+
+  const margin = { top: 8, right: 110, bottom: 52, left: 210 };
+  const rowHeight = 40;
+  const barHeight = 20;
+  const width = 760;
+  const height = margin.top + rows.length * rowHeight + margin.bottom;
+  const x = d3.scaleLinear([0, 25], [margin.left, width - margin.right]);
+
+  const svg = createSvg('#wh-recount', width, height, 'Bar chart of the US maternal mortality rate counted with and without the pregnancy checkbox');
+
+  svg.append('g').attr('class', 'grid')
+    .selectAll('line').data(x.ticks(5)).join('line')
+    .attr('x1', x).attr('x2', x)
+    .attr('y1', margin.top).attr('y2', height - margin.bottom);
+  svg.append('g').attr('class', 'axis')
+    .attr('transform', `translate(0,${height - margin.bottom})`)
+    .call(d3.axisBottom(x).ticks(5).tickSize(0).tickPadding(10));
+  svg.append('text').attr('class', 'axis-title')
+    .attr('x', x(0)).attr('y', height - 10)
+    .text('Maternal deaths per 100,000 live births (NCHS)');
+
+  const row = svg.append('g').selectAll('g').data(rows).join('g')
+    .attr('class', 'row')
+    .attr('transform', (d, i) => `translate(0,${margin.top + i * rowHeight + rowHeight / 2})`);
+
+  row.append('text').attr('class', 'row-label')
+    .attr('x', margin.left - 16).attr('dy', '0.32em')
+    .text(d => d.label);
+  row.append('path').attr('class', 'bar')
+    .attr('d', d => barPath(x(0), x(d.rate), -barHeight / 2, barHeight));
+  row.append('text').attr('class', 'value-label')
+    .attr('x', d => x(d.rate) + 8).attr('dy', '0.32em')
+    .text(d => fmtRate(d.rate));
+  row.append('rect').attr('class', 'hit')
+    .attr('x', 0).attr('y', -rowHeight / 2)
+    .attr('width', width).attr('height', rowHeight)
+    .on('pointerenter pointermove', (event, d) => showTooltip(event, d.label, [
+      { value: fmtRate(d.rate), label: 'maternal deaths per 100,000 live births', color: token('--series-1') },
+    ]))
+    .on('pointerleave', hideTooltip);
+
+  addTable('#wh-checkbox-table', ['NCHS count', 'Maternal deaths per 100,000 live births'],
+    rows.map(d => [d.label, fmtRate(d.rate)]));
 }

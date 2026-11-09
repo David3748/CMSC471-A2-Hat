@@ -10,7 +10,8 @@ Live at **https://david3748.github.io/CMSC471-A2-Hat/** (GitHub Pages, deployed 
 Both visualizations use the World Bank's maternal mortality estimates for 2000–2017.
 
 - **White hat:** maternal mortality by region in 2000 vs 2017, where the world's 295,000 maternal deaths happened,
-  and the US against six wealthy peers, all on zero-based scales.
+  and the US against six wealthy peers, all on zero-based scales. Then how the US pregnancy checkbox on death
+  certificates, phased in by states from 2003 to 2017, inflated US counts (NCHS found it more than doubled the rate).
 - **Black hat:** "The US is killing our mothers." Ranks countries by percent change (the US is #1 of 185, from 12 to
   19 per 100,000) on a Mercator map with a lopsided color scale, and indexes every series to 2000 = 100 so the US
   line climbs while regions with rates 10–40× higher fall.
@@ -31,6 +32,7 @@ Then open http://localhost:8471.
 | `js/main.js` | Loads the data and draws both |
 | `data/maternal_mortality.json` | Derived data, built by `scripts/build_data.py` |
 | `data/countries-110m.json` | Country shapes from [world-atlas](https://github.com/topojson/world-atlas) 2.0.2 (Natural Earth) |
+| `data/nchs_checkbox.json` | When each state added the pregnancy checkbox, and US rates with and without it, transcribed by hand from Tables I and B of [NCHS NVSR 69(1)](https://www.cdc.gov/nchs/data/nvsr/nvsr69/nvsr69_01-508.pdf) |
 
 To rebuild the derived data:
 
