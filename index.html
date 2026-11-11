@@ -1,140 +1,366 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Maternal Mortality, Two Ways</title>
-  <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
-  <header class="page-header">
-    <p class="eyebrow">CMSC471 · Assignment 2: White Hat / Black Hat</p>
-    <h1>Maternal mortality, two ways</h1>
-    <p class="lede">One World Bank dataset, shown honestly and then shown to mislead.</p>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Maternal Mortality, Two Ways</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <header class="page-header">
+      <p class="eyebrow">CMSC471 · Assignment 2: White Hat / Black Hat</p>
+      <h1>Maternal mortality, two ways</h1>
+      <p class="lede">
+        One World Bank dataset, shown honestly and then shown to mislead.
+      </p>
+    </header>
 
-  <main>
-    <section id="white-hat">
-      <h2>White hat</h2>
+    <main>
+      <section id="white-hat">
+        <h2>White hat</h2>
 
-      <article class="chart-card">
-        <h3>From 2000 to 2017, maternal mortality fell in every region except North America</h3>
-        <p class="subtitle">Maternal deaths per 100,000 live births. The US, which has most of North America's births, rose from 12 to 19, still far below the world rate of 211. High-income countries as a group held steady at 11.</p>
-        <div id="wh-rates" class="chart"></div>
-        <p class="caption">Source: World Bank, World Development Indicators; modeled estimates by WHO, UNICEF, UNFPA, the World Bank Group and the UN Population Division. Many countries, especially in sub-Saharan Africa and South Asia, don't register every death, so their rates come from statistical models and carry wide uncertainty ranges. Regions are World Bank groupings. High-income countries are a separate grouping that overlaps them.</p>
-        <details><summary>Data table</summary><div id="wh-rates-table" class="table-view"></div></details>
-      </article>
+        <article class="chart-card">
+          <h3>
+            From 2000 to 2017, maternal mortality fell in every region except
+            North America
+          </h3>
+          <p class="subtitle">
+            Maternal deaths per 100,000 live births. The US, which has most of
+            North America's births, rose from 12 to 19, still far below the
+            world rate of 211. High-income countries as a group held steady at
+            11.
+          </p>
+          <div id="wh-rates" class="chart"></div>
+          <p class="caption">
+            Source: World Bank, World Development Indicators; modeled estimates
+            by WHO, UNICEF, UNFPA, the World Bank Group and the UN Population
+            Division. Many countries, especially in sub-Saharan Africa and South
+            Asia, don't register every death, so their rates come from
+            statistical models and carry wide uncertainty ranges. Regions are
+            World Bank groupings. High-income countries are a separate grouping
+            that overlaps them.
+          </p>
+          <details>
+            <summary>Data table</summary>
+            <div id="wh-rates-table" class="table-view"></div>
+          </details>
+        </article>
 
-      
-
-      <div class="writeup todo">
         <h3>White hat write-up</h3>
-        <p>To be written.</p>
-      </div>
-    </section>
-
-    <section id="black-hat">
-      <h2>Black hat</h2>
-
-      <article class="chart-card news">
-        <p class="kicker">Maternal health</p>
-        <h3 class="headline">The US is killing our mothers</h3>
-        <p class="subtitle">Since 2000, maternal mortality has risen faster in the United States than in any other country on Earth.</p>
-        <div id="bh-stats" class="chart stats"></div>
-
-        <h4>Change in maternal mortality, 2000–2017</h4>
-        <div id="bh-map" class="chart"></div>
-        <div id="bh-map-legend" class="chart map-legend"></div>
-
-        <h4>While the rest of the world made progress, the US went backwards</h4>
-        <div class="legend">
-          <span class="legend-item"><span class="key-line us"></span>United States</span>
-          <span class="legend-item"><span class="key-line bh-context"></span>Other regions</span>
+        <div class="writeup todo">
+          <p>
+            Our dataset is about maternal mortality which is defined as deaths
+            per 100,000 inhabitants. It has data from around the world for
+            countries and World Bank regional aggregates from 2000 to 2017. It
+            has the income bracket assosciated with each area as well (high,
+            upper middle, middle, lower middle, low). We chose a dumbbell chart
+            to show for each region the change between the start of the data and
+            the end. This allows the viewer to see what has changed the most, as
+            that is affects the length of the line between the 2000 and 2017
+            ends of the dumbbell. However, since this does not allow the viewer
+            to easily determine whether the maternal mortality rate was
+            increasing or decreasing everywhere without looking at every single
+            data point, we added an short mention of this at the top of the
+            visualization to point out that only the U.S. had an increase in
+            maternal mortality rates. Furthermore, since this is our White hat
+            visualization, we wanted to make it clear in the short text that the
+            U.S. was still much lower than most other places, even if it did get
+            worse since 2000 in 2017. To ensure clarity and accuracy, we wanted
+            to keep the visualization very simple to avoid overwhelming viewers.
+            This meant we colored the data points for 2000 and 2017 different
+            colors and made specific choices of blue, grey, white, black for the
+            entire visualization. We also chose the dumbbell visualization
+            because it allows you to put only 2 data points and a line for all
+            18 years of data which makes it very simple and intuitive to
+            understand. We also chose to add background lines to make it look a
+            little nicer.
+          </p>
         </div>
-        <div id="bh-index" class="chart"></div>
+      </section>
 
-        <p class="caption">Source: World Bank, World Development Indicators. Estimates by WHO, UNICEF, UNFPA, the World Bank Group and the UN Population Division.</p>
-        <details><summary>Data table</summary><div id="bh-table" class="table-view"></div></details>
-      </article>
+      <section id="black-hat">
+        <h2>Black hat</h2>
 
-      <div class="writeup todo">
+        <article class="chart-card news">
+          <p class="kicker">Maternal health</p>
+          <h3 class="headline">The US is killing our mothers</h3>
+          <p class="subtitle">
+            Since 2000, maternal mortality has risen faster in the United States
+            than in any other country on Earth.
+          </p>
+          <div id="bh-stats" class="chart stats"></div>
+
+          <h4>Change in maternal mortality, 2000–2017</h4>
+          <div id="bh-map" class="chart"></div>
+          <div id="bh-map-legend" class="chart map-legend"></div>
+
+          <h4>
+            While the rest of the world made progress, the US went backwards
+          </h4>
+          <div class="legend">
+            <span class="legend-item"
+              ><span class="key-line us"></span>United States</span
+            >
+            <span class="legend-item"
+              ><span class="key-line bh-context"></span>Other regions</span
+            >
+          </div>
+          <div id="bh-index" class="chart"></div>
+
+          <p class="caption">
+            Source: World Bank, World Development Indicators. Estimates by WHO,
+            UNICEF, UNFPA, the World Bank Group and the UN Population Division.
+          </p>
+          <details>
+            <summary>Data table</summary>
+            <div id="bh-table" class="table-view"></div>
+          </details>
+        </article>
+
         <h3>Black hat write-up</h3>
-        <p>To be written.</p>
-      </div>
-    </section>
-
-    <section id="references">
-      <h2>Data sources and references</h2>
-      <ul>
-        <li>World Bank, <a href="https://datatopics.worldbank.org/world-development-indicators/">World Development Indicators</a> (snapshot of 2021-09-15): maternal mortality ratio, modeled estimate (SH.STA.MMRT) and number of maternal deaths (SH.MMR.DTHS). Licensed <a href="https://datacatalog.worldbank.org/public-licenses#cc-by">CC BY 4.0</a>.</li>
-        <li>Pre-cleaned mirror: <a href="https://github.com/light-and-salt/World-Bank-Data-by-Indicators">World Bank Data by Indicators</a>.</li>
-        <li>WHO, UNICEF, UNFPA, World Bank Group and UN Population Division, <a href="https://www.who.int/publications/i/item/9789241516488"><cite>Trends in Maternal Mortality: 2000 to 2017</cite></a> (2019), the source of the modeled estimates.</li>
-        <li>Donna L. Hoyert, Sayeedha F.G. Uddin and Arialdi M. Miniño, <a href="https://www.cdc.gov/nchs/data/nvsr/nvsr69/nvsr69_01-508.pdf"><cite>Evaluation of the Pregnancy Status Checkbox on the Identification of Maternal Deaths</cite></a>, National Vital Statistics Reports 69(1), National Center for Health Statistics, January 2020. State checkbox adoption dates (Table I) and US rates with and without the checkbox (Table B) were transcribed by hand.</li>
-        <li>Map shapes: <a href="https://github.com/topojson/world-atlas">world-atlas</a> (Natural Earth, 1:110m). Country codes: <a href="https://github.com/michaelwittig/node-i18n-iso-countries">i18n-iso-countries</a>. Charts built with <a href="https://d3js.org/">D3.js</a>.</li>
-      </ul>
-    </section>
-
-    <section id="process" class="todo">
-      <h2>Development process</h2>
-      <p>To be written: how the work was split, people-hours, and what took the most time.</p>
-    </section>
-
-    <section id="ai-usage" class="todo">
-      <h2>AI usage</h2>
-      <p>To be written.</p>
-    </section>
-
-    <section id="extra-credit">
-      <h2>Extra Credit</h2>
-
-      <article class="chart-card">
-        <h3>Two-thirds of maternal deaths happen in sub-Saharan Africa</h3>
-        <p class="subtitle">Number of maternal deaths in 2017 by region, and each region's share of the world's 295,000.</p>
-        <div id="wh-deaths" class="chart"></div>
-        <p class="caption">Source: World Bank, World Development Indicators (number of maternal deaths). Regional estimates are rounded and don't sum exactly to the world total.</p>
-        <details><summary>Data table</summary><div id="wh-deaths-table" class="table-view"></div></details>
-      </article>
-      
-      <article class="chart-card">
-        <h3>Among wealthy countries, the US is the outlier</h3>
-        <p class="subtitle">Maternal deaths per 100,000 live births, 2000–2017.</p>
-        <div class="legend">
-          <span class="legend-item"><span class="key-line highlight"></span>United States</span>
-          <span class="legend-item"><span class="key-line context"></span>Canada, United Kingdom, France, Germany, Japan, Australia</span>
+        <div class="writeup todo">
+          <p>
+            The first thing you see in this is the white bold text that says
+            "The US is killing our mothers". This is meant to influence the
+            viewer to start thinking about this even if they don't believe it
+            right away. We then go on to give statistics on how it has risen
+            over 50% from 2000 to 2017 and that the global average went down
+            38%. We do provide any definition for how maternal mortality rates
+            are calculated and do not mention anything about population
+            increases which could affect it. Furthermore, we have a statistic
+            that it is the #1 fastest increase in any tracked country. We then
+            get to the world map where we brightly colored higher increases and
+            darkly colored decreases so that it is more apparent and draws the
+            eye. There is hover feature which allows the user to see the percent
+            increase/decrease in maternal mortality rates and its place compared
+            to other countries.
+          </p>
+          <p>
+            There is a second visualization right underneath that one to further
+            drive the point home. We purposefully do include other countries
+            that have large decreases to make the disparity seem even larger.
+            The color coding remains the same as the first graph with the U.S.
+            in a bright orange/red and others in darker shades. We chose red as
+            that is usually associated with bad things. These graphs distort
+            perception by making the viewer think the U.S. maternity rates are
+            really poor when in fact they are some of the best in the world.
+          </p>
         </div>
-        <div id="wh-peers" class="chart"></div>
-        <p class="caption">Source: World Bank, World Development Indicators. Part of the US rise likely comes from a change in how US death certificates record pregnancy, shown in the next chart.</p>
-        <details><summary>Data table</summary><div id="wh-peers-table" class="table-view"></div></details>
-      </article>
+      </section>
 
-      <article class="chart-card">
-        <h3>During these years, the US changed how it counts maternal deaths</h3>
-        <p class="subtitle">In 2003 the standard US death certificate added a checkbox asking whether a woman who died was pregnant, or had been in the past year. States added it to their own certificates one at a time over the next 14 years.</p>
-
-        <h4>States whose death certificates had the pregnancy checkbox</h4>
-        <div id="wh-checkbox" class="chart"></div>
-
-        <h4>Counting the same deaths with the checkbox more than doubled the rate</h4>
-        <p class="subtitle">The CDC's National Center for Health Statistics (NCHS) coded the 2016 death records that mentioned a pregnancy twice: once using the checkbox, and once ignoring it, as coders did before 2003.</p>
-        <div id="wh-recount" class="chart"></div>
-
-        <ul class="notes">
-          <li>The checkbox catches maternal deaths that doctors didn't connect to pregnancy when writing the cause of death, but it also adds errors. For women aged 40–54, it multiplied maternal deaths fourteenfold (523 instead of 37 over 2015–2016). Without the checkbox, about half of those deaths would have been coded to cancer or heart disease.</li>
-          <li>Because states weren't counting the same way, NCHS stopped publishing an official national maternal mortality rate after 2007.</li>
-          <li>The World Bank numbers in the charts above are modeled estimates rather than NCHS counts, but for the US they draw on these same death records. So part of the US rise from 12 to 19 likely reflects how deaths were counted rather than added risk. NCHS says its study can't tell how much of the extra count is better detection and how much is error.</li>
+      <section id="references">
+        <h2>Data sources and references</h2>
+        <ul>
+          <li>
+            World Bank,
+            <a
+              href="https://datatopics.worldbank.org/world-development-indicators/"
+              >World Development Indicators</a
+            >
+            (snapshot of 2021-09-15): maternal mortality ratio, modeled estimate
+            (SH.STA.MMRT) and number of maternal deaths (SH.MMR.DTHS). Licensed
+            <a href="https://datacatalog.worldbank.org/public-licenses#cc-by"
+              >CC BY 4.0</a
+            >.
+          </li>
+          <li>
+            Pre-cleaned mirror:
+            <a
+              href="https://github.com/light-and-salt/World-Bank-Data-by-Indicators"
+              >World Bank Data by Indicators</a
+            >.
+          </li>
+          <li>
+            WHO, UNICEF, UNFPA, World Bank Group and UN Population Division,
+            <a href="https://www.who.int/publications/i/item/9789241516488"
+              ><cite>Trends in Maternal Mortality: 2000 to 2017</cite></a
+            >
+            (2019), the source of the modeled estimates.
+          </li>
+          <li>
+            Donna L. Hoyert, Sayeedha F.G. Uddin and Arialdi M. Miniño,
+            <a
+              href="https://www.cdc.gov/nchs/data/nvsr/nvsr69/nvsr69_01-508.pdf"
+              ><cite
+                >Evaluation of the Pregnancy Status Checkbox on the
+                Identification of Maternal Deaths</cite
+              ></a
+            >, National Vital Statistics Reports 69(1), National Center for
+            Health Statistics, January 2020. State checkbox adoption dates
+            (Table I) and US rates with and without the checkbox (Table B) were
+            transcribed by hand.
+          </li>
+          <li>
+            Map shapes:
+            <a href="https://github.com/topojson/world-atlas">world-atlas</a>
+            (Natural Earth, 1:110m). Country codes:
+            <a href="https://github.com/michaelwittig/node-i18n-iso-countries"
+              >i18n-iso-countries</a
+            >. Charts built with <a href="https://d3js.org/">D3.js</a>.
+          </li>
         </ul>
+      </section>
 
-        <p class="caption">Source: Hoyert, Uddin and Miniño, <a href="https://www.cdc.gov/nchs/data/nvsr/nvsr69/nvsr69_01-508.pdf">Evaluation of the Pregnancy Status Checkbox on the Identification of Maternal Deaths</a>, NCHS, 2020: Table I for when each state added the checkbox, Table B for the rates. States count once their own question had the same detail as the standard checkbox; mid-year additions count in that year. California kept a simpler yes/no question. The 2016 rates cover all 50 states and DC; the with-checkbox rate counts California and West Virginia, which lacked the checkbox, the old way. NCHS rates differ from the World Bank's modeled estimates.</p>
-        <details><summary>Data tables</summary><div id="wh-checkbox-table" class="table-view"></div></details>
-      </article>
-    </section>
-  </main>
+      <section id="process">
+        <h2>Development process</h2>
+        <p>
+          The work was split by having David do the majority of the
+          implementation and Sevien reviewing it, doing the write up, and video.
+          This took david about an hour since we discussed our ideas beforehand
+          and it was simple to have AI implement them. It took Sevien about an
+          hour and a half to do the write ups and video as well as make a few
+          tweaks. Overall, the implementation took the most time since David had
+          to wait inbetween prompts for the AI to do the work and then would
+          finetune his prompts to improve the visualizations. Also, since we
+          made multiple graphs for each section, we decided to move some of them
+          to an extra credit section.
+        </p>
+      </section>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
-  <script src="js/helpers.js"></script>
-  <script src="js/whitehat.js"></script>
-  <script src="js/blackhat.js"></script>
-  <script src="js/main.js"></script>
-</body>
+      <section id="ai-usage">
+        <h2>AI usage</h2>
+        <p>
+          We used Claude to implement our ideas. We told it exactly what we
+          wanted from our graphs and such and it wrote all the code. We then
+          made minor changes to small UI things like text size and graph colors.
+        </p>
+      </section>
+
+      <section id="extra-credit">
+        <h2>Extra Credit</h2>
+        <p>
+          We have added a few additional White hat visualizations for extra
+          credit. We used AI to analyze trends in the data so we could make
+          informed decisions on what types of visualizations would best
+          represent these trends. One example of this is the second
+          visualization in this section, which shows Among wealthy countries,
+          the US is the outlier. Many data scientists are using AI to look for
+          trends and patterns in data and we felt like this would be a good
+          opportunity to do so on a small scale. While our visualizations are
+          not novel, we felt that the manner in which we went about creating
+          them, the finding of trends and informing our decisions, was.
+        </p>
+
+        <article class="chart-card">
+          <h3>Two-thirds of maternal deaths happen in sub-Saharan Africa</h3>
+          <p class="subtitle">
+            Number of maternal deaths in 2017 by region, and each region's share
+            of the world's 295,000.
+          </p>
+          <div id="wh-deaths" class="chart"></div>
+          <p class="caption">
+            Source: World Bank, World Development Indicators (number of maternal
+            deaths). Regional estimates are rounded and don't sum exactly to the
+            world total.
+          </p>
+          <details>
+            <summary>Data table</summary>
+            <div id="wh-deaths-table" class="table-view"></div>
+          </details>
+        </article>
+
+        <article class="chart-card">
+          <h3>Among wealthy countries, the US is the outlier</h3>
+          <p class="subtitle">
+            Maternal deaths per 100,000 live births, 2000–2017.
+          </p>
+          <div class="legend">
+            <span class="legend-item"
+              ><span class="key-line highlight"></span>United States</span
+            >
+            <span class="legend-item"
+              ><span class="key-line context"></span>Canada, United Kingdom,
+              France, Germany, Japan, Australia</span
+            >
+          </div>
+          <div id="wh-peers" class="chart"></div>
+          <p class="caption">
+            Source: World Bank, World Development Indicators. Part of the US
+            rise likely comes from a change in how US death certificates record
+            pregnancy, shown in the next chart.
+          </p>
+          <details>
+            <summary>Data table</summary>
+            <div id="wh-peers-table" class="table-view"></div>
+          </details>
+        </article>
+
+        <article class="chart-card">
+          <h3>
+            During these years, the US changed how it counts maternal deaths
+          </h3>
+          <p class="subtitle">
+            In 2003 the standard US death certificate added a checkbox asking
+            whether a woman who died was pregnant, or had been in the past year.
+            States added it to their own certificates one at a time over the
+            next 14 years.
+          </p>
+
+          <h4>States whose death certificates had the pregnancy checkbox</h4>
+          <div id="wh-checkbox" class="chart"></div>
+
+          <h4>
+            Counting the same deaths with the checkbox more than doubled the
+            rate
+          </h4>
+          <p class="subtitle">
+            The CDC's National Center for Health Statistics (NCHS) coded the
+            2016 death records that mentioned a pregnancy twice: once using the
+            checkbox, and once ignoring it, as coders did before 2003.
+          </p>
+          <div id="wh-recount" class="chart"></div>
+
+          <ul class="notes">
+            <li>
+              The checkbox catches maternal deaths that doctors didn't connect
+              to pregnancy when writing the cause of death, but it also adds
+              errors. For women aged 40–54, it multiplied maternal deaths
+              fourteenfold (523 instead of 37 over 2015–2016). Without the
+              checkbox, about half of those deaths would have been coded to
+              cancer or heart disease.
+            </li>
+            <li>
+              Because states weren't counting the same way, NCHS stopped
+              publishing an official national maternal mortality rate after
+              2007.
+            </li>
+            <li>
+              The World Bank numbers in the charts above are modeled estimates
+              rather than NCHS counts, but for the US they draw on these same
+              death records. So part of the US rise from 12 to 19 likely
+              reflects how deaths were counted rather than added risk. NCHS says
+              its study can't tell how much of the extra count is better
+              detection and how much is error.
+            </li>
+          </ul>
+
+          <p class="caption">
+            Source: Hoyert, Uddin and Miniño,
+            <a
+              href="https://www.cdc.gov/nchs/data/nvsr/nvsr69/nvsr69_01-508.pdf"
+              >Evaluation of the Pregnancy Status Checkbox on the Identification
+              of Maternal Deaths</a
+            >, NCHS, 2020: Table I for when each state added the checkbox, Table
+            B for the rates. States count once their own question had the same
+            detail as the standard checkbox; mid-year additions count in that
+            year. California kept a simpler yes/no question. The 2016 rates
+            cover all 50 states and DC; the with-checkbox rate counts California
+            and West Virginia, which lacked the checkbox, the old way. NCHS
+            rates differ from the World Bank's modeled estimates.
+          </p>
+          <details>
+            <summary>Data tables</summary>
+            <div id="wh-checkbox-table" class="table-view"></div>
+          </details>
+        </article>
+      </section>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+    <script src="js/helpers.js"></script>
+    <script src="js/whitehat.js"></script>
+    <script src="js/blackhat.js"></script>
+    <script src="js/main.js"></script>
+  </body>
 </html>
